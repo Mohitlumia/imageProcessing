@@ -1,6 +1,7 @@
 #%%
 from skimage import io
 from skimage.transform import rescale, resize, downscale_local_mean
+from matplotlib import pyplot as plt
 
 img = io.imread("sample_images/2monkey.jpg", as_gray = True)
 
