@@ -14,9 +14,13 @@ entropy_img = entropy(img, disk(3))
 
 
 # now the entropy_img can be segmented using threshold
-# there are many threshold based segmentation let see them all
+# lets apply otsu threshold as it showed comparetively batter result
 
-from skimage.filters import try_all_threshold
+from skimage.filters import threshold_otsu
 
-fig, ax = try_all_threshold(entropy_img,figsize=(10,8),verbose=False)
-plt.show()
+threshold_val = threshold_otsu(entropy_img)
+# now as we have threshold value can use it to make a binary image
+
+binary_img = entropy_img <= threshold_val
+
+plt.imshow(binary_img,cmap="gray")
