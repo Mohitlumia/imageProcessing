@@ -12,6 +12,11 @@ from skimage.morphology import disk
 
 entropy_img = entropy(img, disk(3))
 
-plt.imshow(entropy_img,cmap = "gray")
 
 # now the entropy_img can be segmented using threshold
+# there are many threshold based segmentation let see them all
+
+from skimage.filters import try_all_threshold
+
+fig, ax = try_all_threshold(entropy_img,figsize=(10,8),verbose=False)
+plt.show()
