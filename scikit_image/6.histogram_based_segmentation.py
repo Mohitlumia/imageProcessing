@@ -32,4 +32,4 @@ all_segm[segm4] = (1,1,0)
 all_segm[segm5] = (0,1,1)
 all_segm[segm6] = (1,0,1)
 
-plt.imshow(all_segm)
+plt.imsave("processed_images/6histogram_segmented.jpg",all_segm)
