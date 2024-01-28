@@ -15,3 +15,11 @@ gaussian_img = nd.gaussian_filter(img, sigma = 3)
 # sigma 1 = 68%, sigma 2 = 95% and sigma 3 = 99.7%
 
 plt.imsave("processed_images/5gaussian.jpg", gaussian_img)
+
+#%%
+# now lets apply median filter to denoise our orignal image
+
+median_img = nd.median_filter(img, size = 3)
+# size of the window of the kernal
+
+plt.imsave("processed_images/5median.jpg",median_img)
