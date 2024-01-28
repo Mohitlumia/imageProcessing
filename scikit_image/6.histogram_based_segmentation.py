@@ -13,4 +13,4 @@ sigma_est = np.mean(estimate_sigma(img, channel_axis=-1))
 nlm_img = denoise_nl_means(img,h = 1.15*sigma_est, fast_mode=True, patch_size=5, patch_distance=3)
 nlm_ubyte_img = img_as_ubyte(nlm_img)
 
-plt.imsave("processed_images/6denoise_img.jpg", nlm_ubyte_img)
+plt.hist(nlm_ubyte_img.flat,bins=100, range=(0,255))
