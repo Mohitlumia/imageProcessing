@@ -30,7 +30,10 @@ plt.imsave("processed_images/5median.jpg",median_img)
 import numpy as np
 from skimage.restoration import estimate_sigma, denoise_nl_means
 
-sigma_est = np.mean(estimate_sigma(img, channel_axis=-1))
+# well lets see how its gonna work with float img
+from skimage import img_as_float
+
+sigma_est = np.mean(estimate_sigma(img_as_float(img), channel_axis=-1))
 # channel_axis is color axis
 
 nlm_img = denoise_nl_means(img,h = 1.15*sigma_est, fast_mode=True, patch_size=5, patch_distance=3, channel_axis=-1)
