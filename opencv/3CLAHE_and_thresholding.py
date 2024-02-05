@@ -12,8 +12,9 @@ eq_img = cv2.equalizeHist(img)
 clhe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8,8))
 cl_img = clhe.apply(img)
 
+ret, thresh = cv2.threshold(cl_img, 190, 150, cv2.THRESH_BINARY)
+
 cv2.imshow("Original image", img)
-cv2.imshow("Equalized image", eq_img)
-cv2.imshow("CLHE image", cl_img)
+cv2.imshow("Thresh", thresh)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
