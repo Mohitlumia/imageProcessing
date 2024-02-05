@@ -14,7 +14,10 @@ cl_img = clhe.apply(img)
 
 ret, thresh = cv2.threshold(cl_img, 190, 150, cv2.THRESH_BINARY)
 
+ret2, outs = cv2.threshold(src=cl_img, thresh=0, maxval=255, type=cv2.THRESH_OTSU+cv2.THRESH_BINARY)
+
 cv2.imshow("Original image", img)
 cv2.imshow("Thresh", thresh)
+cv2.imshow("Otsu thresh", outs)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
