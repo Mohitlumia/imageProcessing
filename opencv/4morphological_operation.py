@@ -19,9 +19,10 @@ erosion = cv2.erode(outs,kernel,iterations=1)
 # erosion is followed by dilation in denoising
 dilation = cv2.dilate(erosion,kernel,iterations=1)
 
-cv2.imshow("Original image", img)
-cv2.imshow("Otsu",outs)
-cv2.imshow("Erosion image",erosion)
+# opening in cv2 is equal to erosion + dilation
+opening = cv2.morphologyEx(outs,cv2.MORPH_OPEN,kernel)
+
 cv2.imshow("Erosion+Dilation image",dilation)
+cv2.imshow("Opening",opening)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
