@@ -10,7 +10,13 @@ plt.hist(img.flat,bins=256,range=(0,255))
 # applying Otsu based thresholding
 ret,outs = cv2.threshold(img,0,255,cv2.THRESH_OTSU+cv2.THRESH_BINARY)
 
+# applying erosion
+# is useful for removing small white noises
+kernel = np.ones((3,3),np.uint8)
+erosion = cv2.erode(outs,kernel,iterations=1)
+
 cv2.imshow("Original image", img)
 cv2.imshow("Otsu",outs)
+cv2.imshow("Erosion image",erosion)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
