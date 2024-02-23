@@ -50,6 +50,24 @@ kp = detector.detect(img)
 
 img2 = cv2.drawKeypoints(img,kp,None,flags=0)
 
-cv2.imshow("Corners", img2)
+#cv2.imshow("Corners", img2)
+#cv2.waitKey(0)
+
+###################################################
+
+# ORB
+# it contains both the detector(FAST) and descriptor(BRIEF)
+
+img = cv2.imread("opencv/sample_images/5grains.jpg")
+
+orb = cv2.ORB_create(50)
+
+kp, des = orb.detectAndCompute(img,None)
+
+img2 = cv2.drawKeypoints(img,kp,None,flags=0)
+
+cv2.imshow("ORB", img2)
 cv2.waitKey(0)
+
+
 
