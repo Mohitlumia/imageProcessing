@@ -34,5 +34,22 @@ for coordinate in corners:
     x,y = coordinate.ravel()
     cv2.circle(img,(x,y),3,255,-1)
 
-cv2.imshow("Corner",img)
+#cv2.imshow("Corner",img)
+#cv2.waitKey(0)
+
+###################################################
+    
+# Fast Feature Detector
+
+img = cv2.imread("opencv/sample_images/5grains.jpg")
+
+# initiate FAST object with default values
+detector = cv2.FastFeatureDetector_create()
+
+kp = detector.detect(img)
+
+img2 = cv2.drawKeypoints(img,kp,None,flags=0)
+
+cv2.imshow("Corners", img2)
 cv2.waitKey(0)
+
