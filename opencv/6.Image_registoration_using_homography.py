@@ -50,6 +50,6 @@ draw_matches_img = cv2.drawMatches(img1, kp1, img2, kp2, matches[:10], None)
 
 cv2.imshow("Draw Matches", draw_matches_img)
 cv2.imshow("Registered Image", im1Reg)
-cv2.imwrite("opencv/processed_image/6Draw Matches.jpg", draw_matches_img)
-cv2.imwrite("opencv/processed_image/6Registered Image.jpg", im1Reg)
+cv2.imwrite("opencv/processed_image/6Draw_Matches.jpg", draw_matches_img)
+cv2.imwrite("opencv/processed_image/6Registered_Image.jpg", im1Reg)
 cv2.waitKey(0)
