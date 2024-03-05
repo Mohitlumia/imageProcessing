@@ -14,7 +14,26 @@ kernel = np.ones((3,3), np.uint8)
 eroded = cv2.erode(thresh, kernel, iterations = 1)
 dilated = cv2.dilate(eroded, kernel, iterations = 1)
 
-cv2.imshow("thresh",thresh)
-cv2.imshow("eroded",eroded)
-cv2.imshow("dilated",dilated)
+# convert into binary image
+mask = dilated == 255
+
+# defining structure factor
+s = [[1,1,1],
+     [1,1,1],
+     [1,1,1]]
+
+# assigning label to each object (grain) in binary image
+from scipy import ndimage
+
+label_mask, num_labels = ndimage.label(mask,structure=s)
+# label_mask are labels on each object(grain)
+# num_lables are total number of labels
+# structure defines in what direction we consider the connection
+
+# lets see the each label_mask with random color
+from skimage import color
+
+colored_labeled_img = color.label2rgb(label_mask, bg_label=0)#background color 0 (black)
+
+cv2.imshow("colored labeled image",colored_labeled_img)
 cv2.waitKey(0)
