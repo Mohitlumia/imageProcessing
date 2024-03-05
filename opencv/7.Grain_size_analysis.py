@@ -35,5 +35,19 @@ from skimage import color
 
 colored_labeled_img = color.label2rgb(label_mask, bg_label=0)#background color 0 (black)
 
-cv2.imshow("colored labeled image",colored_labeled_img)
-cv2.waitKey(0)
+#cv2.imshow("colored labeled image",colored_labeled_img)
+#cv2.waitKey(0)
+
+# now lets get the properties of our labeled grain
+from skimage import measure
+
+clusters = measure.regionprops(label_image=label_mask, intensity_image=img)
+# intensity_image is optional
+
+# clusters contains regional properties
+# lets extract those properties
+# clusters[0] means first grain
+
+for grain in clusters:
+    print(f"label: {grain.label} has {grain.area} um^2 area")
+
