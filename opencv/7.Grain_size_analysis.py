@@ -49,5 +49,5 @@ clusters = measure.regionprops(label_image=label_mask, intensity_image=img)
 # clusters[0] means first grain
 
 for grain in clusters:
-    print(f"label: {grain.label} has {grain.area} um^2 area")
+    print(f"label: {grain.label} has {grain.area * pixel_size_um**2} um^2 area")
 
