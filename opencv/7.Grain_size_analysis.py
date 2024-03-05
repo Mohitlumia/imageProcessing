@@ -58,7 +58,7 @@ propList = ['Area',
             'MeanIntensity',
             'MaxIntensity']
 
-output_file = open('opencv/sample_image/image_measurements.csv', 'w')
+output_file = open("opencv/processed_image/7image_measurements.csv", "w")
 output_file.write(',' + ",".join(propList) + '\n') #join strings in array by commas, leave first cell blank
 #First cell blank to leave room for header (column names)
 
@@ -66,14 +66,18 @@ for grain in clusters:
     #output cluster properties to the excel file
     output_file.write(str(grain['Label']))
     for i,prop in enumerate(propList):
-        if(prop == 'Area'): 
-            to_print = grain[prop]*pixels_to_um**2   #Convert pixel square to um square
-        elif(prop == 'orientation'): 
-            to_print = grain[prop]*57.2958  #Convert to degrees from radians
-        elif(prop.find('Intensity') < 0):          # Any prop without Intensity in its name
-            to_print = grain[prop]*pixels_to_um
-        else: 
-            to_print = grain[prop]     #Reamining props, basically the ones with Intensity in its name
+        if(prop == 'Area'):
+            #Convert pixel square to um square
+            to_print = grain[prop]*pixel_size_um**2
+        elif(prop == 'orientation'):
+            #Convert to degrees from radians
+            to_print = grain[prop]*57.2958
+        elif(prop.find('Intensity') < 0):
+            # intensity properties
+            to_print = grain[prop]*pixel_size_um
+        else:
+            #Reamining props
+            to_print = grain[prop]
         output_file.write(',' + str(to_print))
     output_file.write('\n')
-output_file.close()   #Closes the file, otherwise it would be read only.
+output_file.close()
