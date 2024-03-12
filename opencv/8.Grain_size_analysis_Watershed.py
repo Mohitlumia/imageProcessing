@@ -3,7 +3,8 @@ import cv2
 import numpy as np
 
 # read the image
-img = cv2.imread("opencv/sample_images/8grains2.jpg", 0)
+img_color = cv2.imread("opencv/sample_images/8grains2.jpg")
+img = cv2.cvtColor(img_color,cv2.COLOR_BGR2GRAY)
 pixel_size_um = 0.5
 
 # threshold with otsu
@@ -26,6 +27,17 @@ sure_fg = np.uint8(sure_fg)
 # unknown regions
 unknown = cv2.subtract(sure_bg, sure_fg)
 
+# markers
+ret3, markers = cv2.connectedComponents(sure_fg)
+
+markers = markers+10
+
+markers[unknown==255] = 0
+
+markers = cv2.watershed(img_color,markers)
+
+img_color[markers == -1] = [255,0,0]
+
 cv2.imshow("original image", thresh)
-cv2.imshow("unknown image", unknown)
+cv2.imshow("watershed", img_color)
 cv2.waitKey(0)
