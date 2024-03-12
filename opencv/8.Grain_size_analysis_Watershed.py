@@ -3,7 +3,7 @@ import cv2
 import numpy as np
 
 # read the image
-img = cv2.imread("opencv/sample_images/7grains2.jpg", 0)
+img = cv2.imread("opencv/sample_images/8grains2.jpg", 0)
 pixel_size_um = 0.5
 
 # threshold with otsu
@@ -21,8 +21,11 @@ dist_transform = cv2.distanceTransform(thresh,cv2.DIST_L2,3)
 
 ret2, sure_fg = cv2.threshold(dist_transform, 0.2*dist_transform.max(), 255, 0)
 
+sure_fg = np.uint8(sure_fg)
+
+# unknown regions
+unknown = cv2.subtract(sure_bg, sure_fg)
+
 cv2.imshow("original image", thresh)
-cv2.imshow("opening image", opening)
-cv2.imshow("sure_bg image", sure_bg)
-cv2.imshow("sure_fg image", sure_fg)
+cv2.imshow("unknown image", unknown)
 cv2.waitKey(0)
