@@ -25,7 +25,7 @@ sure_bg = cv2.dilate(opening,kernel,iterations=2)
 # sure forground or grain boundary
 dist_transform = cv2.distanceTransform(opening,cv2.DIST_L2,3)
 
-ret2, sure_fg = cv2.threshold(dist_transform, 0.2*dist_transform.max(), 255, 0)
+ret2, sure_fg = cv2.threshold(dist_transform, 0.1*dist_transform.max(), 255, 0)
 
 sure_fg = np.uint8(sure_fg)
 
@@ -46,7 +46,9 @@ img_color[markers == -1] = [255,0,0]
 # color each grain
 img_grain_color = color.label2rgb(markers, bg_label=0)
 
-cv2.imshow("threshold image", thresh)
 cv2.imshow("watershed", img_color)
 cv2.imshow("colored grains",img_grain_color)
 cv2.waitKey(0)
+
+cv2.imwrite("opencv/processed_image/8watershed.jpg", img_color)
+cv2.imwrite("opencv/processed_image/8colored_grains.jpg", img_grain_color)
