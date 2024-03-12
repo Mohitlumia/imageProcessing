@@ -1,6 +1,7 @@
 
 import cv2
 import numpy as np
+from skimage import color
 
 # read the image
 img_color = cv2.imread("opencv/sample_images/8grains2.jpg")
@@ -15,7 +16,7 @@ kernel = np.ones((3,3), np.uint8)
 opening = cv2.morphologyEx(thresh,cv2.MORPH_OPEN,kernel,iterations=2)
 
 # sure background or grain boundary
-sure_bg = cv2.dilate(opening,kernel,iterations=1)
+sure_bg = cv2.dilate(opening,kernel,iterations=2)
 
 # sure forground or grain boundary
 dist_transform = cv2.distanceTransform(thresh,cv2.DIST_L2,3)
@@ -38,6 +39,10 @@ markers = cv2.watershed(img_color,markers)
 
 img_color[markers == -1] = [255,0,0]
 
+# color each grain
+img_grain_color = color.label2rgb(markers, bg_label=0)
+
 cv2.imshow("original image", thresh)
 cv2.imshow("watershed", img_color)
+cv2.imshow("colored grains",img_grain_color)
 cv2.waitKey(0)
