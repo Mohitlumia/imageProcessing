@@ -41,7 +41,7 @@ markers[unknown==255] = 0
 
 markers = cv2.watershed(img_color,markers)
 
-img_color[markers == -1] = [255,0,0]
+img_color[markers == -1] = [0,0,255]
 
 # color each grain
 img_grain_color = color.label2rgb(markers, bg_label=0)
@@ -51,4 +51,3 @@ cv2.imshow("colored grains",img_grain_color)
 cv2.waitKey(0)
 
 cv2.imwrite("opencv/processed_image/8watershed.jpg", img_color)
-cv2.imwrite("opencv/processed_image/8colored_grains.jpg", img_grain_color)
